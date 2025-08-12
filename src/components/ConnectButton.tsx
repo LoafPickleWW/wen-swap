@@ -41,7 +41,7 @@ export default function ConnectButton() {
   const peraWallet = new PeraWalletConnect();
   const deflyWallet = new DeflyWalletConnect();
   const daffiWallet = new DaffiWalletConnect();
-  const luteWallet = new LuteConnect("Swap Shop");
+  const luteWallet = new LuteConnect();
 
   // handlers
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {

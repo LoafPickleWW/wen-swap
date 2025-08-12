@@ -35,7 +35,7 @@ import {
 const peraWallet = new PeraWalletConnect({ shouldShowSignTxnToast: true });
 const deflyWallet = new DeflyWalletConnect({ shouldShowSignTxnToast: true });
 const daffiWallet = new DaffiWalletConnect({ shouldShowSignTxnToast: true });
-const luteWallet = new LuteConnect("Swap Shop");
+const luteWallet = new LuteConnect();
 const algodClient = new Algodv2("", NODE_URL, "");
 
 export const shortenAddress = (walletAddress: string, count: number = 4) => {
@@ -199,7 +199,7 @@ export async function signTransactions(
       multipleTxnGroups = groups.map((txn) => {
         return {
           txn: Buffer.from(encodeUnsignedTransaction(txn)).toString("base64"),
-          signers: [signer],
+          signers: signer === encodeAddress(txn.from.publicKey) ? [signer] : [],
         };
       });
       signedTxns = (await luteWallet.signTxns(multipleTxnGroups)).filter(
